@@ -8,22 +8,22 @@ def load_users():
 
 
 def filter_users_by_name(name, users):
-    """Filtert Benutzer nach dem eingegebenen Namen und gibt sie aus."""
-    filtered_users = [user for user in users if user["name"].lower() == name.lower()]
-
-    for user in filtered_users:
-        print(user)
+    """Filtert Benutzer nach dem eingegebenen Namen und gibt sie zurück."""
+    return [user for user in users if user["name"].lower() == name.lower()]
 
 
 def filter_by_age(age, users):
-    """Filtert Benutzer nach dem eingegebenen Alter und gibt sie aus."""
-    filtered_users = [user for user in users if user["age"] == age]
+    """Filtert Benutzer nach dem eingegebenen Alter und gibt sie zurück."""
+    return [user for user in users if user["age"] == age]
 
+
+def print_users(filtered_users):
+    """Gibt die gefilterten Benutzer auf dem Bildschirm aus."""
     for user in filtered_users:
         print(user)
 
 
-if __name__ == "__main__":
+def main():
     filter_option = input("What would you like to filter by? "
                           "(Currently, only 'name' and 'age' is supported): ").strip().lower()
 
@@ -31,14 +31,20 @@ if __name__ == "__main__":
 
     if filter_option == "name":
         name_to_search = input("Enter a name to filter users: ").strip()
-        filter_users_by_name(name_to_search, users_data)
+        filtered_users = filter_users_by_name(name_to_search, users_data)
+        print_users(filtered_users)
 
     elif filter_option == "age":
         try:
             age_to_search = int(input("Enter an age to filter users: ").strip())
-            filter_by_age(age_to_search, users_data)
+            filtered_users = filter_by_age(age_to_search, users_data)
+            print_users(filtered_users)
         except ValueError:
             print("Invalid age.")
 
     else:
         print("Filtering by that option is not yet supported.")
+
+
+if __name__ == "__main__":
+    main()
