@@ -2,28 +2,29 @@ import json
 
 
 def load_users():
-    """Lädt Benutzerdaten aus der JSON-Datei und gibt sie zurück."""
+    """Loads user data from the JSON file and returns it."""
     with open("users.json", "r") as file:
         return json.load(file)
 
 
 def filter_users_by_name(name, users):
-    """Filtert Benutzer nach dem eingegebenen Namen und gibt sie zurück."""
+    """Filters users by the specified name and returns the matching users."""
     return [user for user in users if user["name"].lower() == name.lower()]
 
 
 def filter_by_age(age, users):
-    """Filtert Benutzer nach dem eingegebenen Alter und gibt sie zurück."""
+    """Filters users by the specified age and returns the matching users."""
     return [user for user in users if user["age"] == age]
 
 
 def print_users(filtered_users):
-    """Gibt die gefilterten Benutzer auf dem Bildschirm aus."""
+    """Prints the filtered users to the screen."""
     for user in filtered_users:
         print(user)
 
 
 def main():
+    """Starts and controls the program flow."""
     filter_option = input("What would you like to filter by? "
                           "(Currently, only 'name' and 'age' is supported): ").strip().lower()
 
