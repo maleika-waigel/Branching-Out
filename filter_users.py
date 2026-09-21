@@ -17,6 +17,11 @@ def filter_by_age(age, users):
     return [user for user in users if user["age"] == age]
 
 
+def filter_users_by_email(email, users):
+    """Filters users by the specified email and returns the matching users."""
+    return [user for user in users if user["email"] == email]
+
+
 def print_users(filtered_users):
     """Prints the filtered users to the screen."""
     for user in filtered_users:
@@ -26,7 +31,7 @@ def print_users(filtered_users):
 def main():
     """Starts and controls the program flow."""
     filter_option = input("What would you like to filter by? "
-                          "(Currently, only 'name' and 'age' is supported): ").strip().lower()
+                          "(Currently, only 'name', 'age' and 'email' is supported): ").strip().lower()
 
     users_data = load_users()
 
@@ -42,6 +47,11 @@ def main():
             print_users(filtered_users)
         except ValueError:
             print("Invalid age.")
+
+    elif filter_option == "email":
+        email_to_search = input("Enter an email to filter users: ").strip()
+        filtered_users = filter_users_by_email(email_to_search, users_data)
+        print_users(filtered_users)
 
     else:
         print("Filtering by that option is not yet supported.")
